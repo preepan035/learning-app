@@ -1,212 +1,144 @@
-import React, { useEffect } from 'react';
-import {
-View,
-Text,
-StyleSheet,
-Image,
-TouchableOpacity,
-ScrollView,
-SafeAreaView,
-Dimensions
-} from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
-
-const { width } = Dimensions.get('window');
+import React from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }) => {
-// ซ่อน Splash Screen เมื่อหน้า Home โหลดเสร็จ
-useEffect(() => {
-async function hideSplash() {
-// หากมีการโหลดข้อมูลเพิ่มเติม ทําที่นี่
-await SplashScreen.hideAsync();
-}
-hideSplash();
-}, []);
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.header}>
+          <Image
+            source={require('../assets/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+          <Text style={styles.appTitle}>Thai Learning App</Text>
+          <Text style={styles.appSubtitle}>เรียนรู้ภาษาไทยออนไลน์</Text>
+        </View>
 
-const handleLessonPress = () => {
-navigation.navigate('LessonList');
-};
+        <View style={styles.infoContainer}>
+          <View style={styles.infoCard}>
+            <Ionicons name="book-outline" size={40} color="#5e72e4" />
+            <Text style={styles.infoTitle}>10+ บทเรียน</Text>
+            <Text style={styles.infoDescription}>
+              บทเรียนหลากหลายรูปแบบ ครอบคลุมทุกทักษะการเรียนรู้
+            </Text>
+          </View>
 
-return (
-<SafeAreaView style={styles.safeArea}>
-<ScrollView style={styles.container}>
-{/* ส่วนหัว */}
-<View style={styles.header}>
-<Image
-source={require('../assets/images/logo.png')}
-style={styles.logo}
-resizeMode="contain"
-/>
-<Text style={styles.appName}>ห้องเรียนวิชาภาษาอังกฤษพื้นฐาน</Text>
-<Text style={styles.subtitle}>เรียนรู้ได้ทุกที่ทุกเวลา</Text>
-</View>
+          <View style={styles.infoCard}>
+            <Ionicons name="time-outline" size={40} color="#5e72e4" />
+            <Text style={styles.infoTitle}>เรียนได้ทุกที่ทุกเวลา</Text>
+            <Text style={styles.infoDescription}>
+              ศึกษาบทเรียนได้ตามความต้องการของคุณ
+            </Text>
+          </View>
 
-{/* ส่วนเนื้อหา */}
-<View style={styles.contentContainer}>
-<View style={styles.welcomeCard}>
-<Text style={styles.welcomeTitle}>ยินดีต้อนรับ!</Text>
-<Text style={styles.welcomeText}>
-แอปพลิเคชันนี้จะช่วยให้คุณเข้าถึงบทเรียนได้ง่ายๆ เพียงปลายนิ้ว
-สามารถเรียนรู้ได้ทุกที่ทุกเวลาตามที่คุณต้องการ
-</Text>
+          <View style={styles.infoCard}>
+            <Ionicons name="ribbon-outline" size={40} color="#5e72e4" />
+            <Text style={styles.infoTitle}>วัดผลการเรียนรู้</Text>
+            <Text style={styles.infoDescription}>
+              แบบทดสอบหลังเรียนเพื่อประเมินความเข้าใจ
+            </Text>
+          </View>
+        </View>
 
-<TouchableOpacity
-style={styles.lessonButton}
-onPress={handleLessonPress}
->
-<Text style={styles.lessonButtonText}>เข้าสู่บทเรียน</Text>
-</TouchableOpacity>
-</View>
-
-{/* ส่วนแสดงฟีเจอร์ */}
-<Text style={styles.sectionTitle}>ฟีเจอร์เด่น</Text>
-<View style={styles.featuresContainer}>
-<View style={styles.featureCard}>
-<Image
-source={require('../assets/images/feature1.png')}
-style={styles.featureIcon}
-/>
-<Text style={styles.featureTitle}>เนื้อหาที่เข้าใจง่าย</Text>
-<Text style={styles.featureText}>
-ออกแบบมาให้เข้าใจง่ายสําหรับผู้เรียนทุกระดับ
-</Text>
-</View>
-<View style={styles.featureCard}>
-<Image
-source={require('../assets/images/feature2.png')}
-style={styles.featureIcon}
-/>
-<Text style={styles.featureTitle}>แบบทดสอบโต้ตอบ</Text>
-<Text style={styles.featureText}>
-ทดสอบความเข้าใจด้วยแบบทดสอบแบบโต้ตอบ
-</Text>
-</View>
-
-<View style={styles.featureCard}>
-<Image
-source={require('../assets/images/feature3.png')}
-style={styles.featureIcon}
-/>
-<Text style={styles.featureTitle}>ติดตามความก้าวหน้า</Text>
-<Text style={styles.featureText}>
-ดูความก้าวหน้าและผลการเรียนของคุณได้ตลอดเวลา
-</Text>
-</View>
-</View>
-</View>
-</ScrollView>
-</SafeAreaView>
-);
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('LessonList')}
+        >
+          <Text style={styles.buttonText}>เริ่มเรียนเลย</Text>
+          <Ionicons name="arrow-forward" size={20} color="#fff" />
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-safeArea: {
-flex: 1,
-backgroundColor: '#f8f9fa',
-},
-container: {
-flex: 1,
-},
-header: {
-backgroundColor: '#5e72e4',
-padding: 20,
-alignItems: 'center',
-borderBottomLeftRadius: 20,
-borderBottomRightRadius: 20,
-},
-logo: {
-width: 100,
-height: 100,
-marginBottom: 10,
-},
-appName: {
-fontSize: 30,
-fontWeight: 'bold',
-color: '#ffffff',
-marginBottom: 5,
-},
-subtitle: {
-fontSize: 16,
-color: '#e6e9fc',
-},
-contentContainer: {
-padding: 16,
-},
-welcomeCard: {
-backgroundColor: '#ffffff',
-borderRadius: 10,
-padding: 20,
-marginVertical: 16,
-elevation: 3,
-shadowColor: '#000',
-shadowOffset: { width: 0, height: 2 },
-shadowOpacity: 0.1,
-shadowRadius: 4,
-},
-welcomeTitle: {
-fontSize: 22,
-fontWeight: 'bold',
-color: '#333',
-marginBottom: 10,
-},
-welcomeText: {
-fontSize: 16,
-color: '#555',
-lineHeight: 24,
-marginBottom: 20,
-},
-lessonButton: {
-backgroundColor: '#5e72e4',
-paddingVertical: 12,
-paddingHorizontal: 24,
-borderRadius: 8,
-alignItems: 'center',
-},
-lessonButtonText: {
-color: '#ffffff',
-fontWeight: 'bold',
-fontSize: 16,
-},
-sectionTitle: {
-fontSize: 20,
-fontWeight: 'bold',
-color: '#333',
-marginTop: 20,
-marginBottom: 15,
-},
-featuresContainer: {
-flexDirection: 'row',
-flexWrap: 'wrap',
-justifyContent: 'space-between',
-},
-featureCard: {
-backgroundColor: '#ffffff',
-borderRadius: 10,
-padding: 15,
-marginBottom: 15,
-width: width > 600 ? (width - 48) / 3 - 8 : '100%',
-elevation: 2,
-shadowColor: '#000',
-shadowOffset: { width: 0, height: 1 },
-shadowOpacity: 0.1,
-shadowRadius: 2,
-},
-featureIcon: {
-width: 50,
-height: 50,
-marginBottom: 10,
-},
-featureTitle: {
-fontSize: 18,
-fontWeight: 'bold',
-color: '#333',
-marginBottom: 5,
-},
-featureText: {
-fontSize: 14,
-color: '#666',
-lineHeight: 20,
-},
+  container: {
+    flex: 1,
+    backgroundColor: '#f4f5f7',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 30,
+  },
+  header: {
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+    marginBottom: 20,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 10,
+  },
+  appTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#5e72e4',
+    marginBottom: 5,
+  },
+  appSubtitle: {
+    fontSize: 16,
+    color: '#8898aa',
+  },
+  infoContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 30,
+  },
+  infoCard: {
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    padding: 20,
+    marginBottom: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  infoTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#525f7f',
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  infoDescription: {
+    fontSize: 14,
+    color: '#8898aa',
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#5e72e4',
+    borderRadius: 10,
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    shadowColor: '#5e72e4',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 6,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginRight: 10,
+  },
 });
 
 export default HomeScreen;
